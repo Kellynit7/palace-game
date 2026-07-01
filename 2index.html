@@ -49,21 +49,21 @@
         <div class="role-selection-area">
             <div class="role-card" id="role_eunuch" onclick="selectRole('太監')">
                 <div class="role-img-placeholder">
-                    <img src="https://images.unsplash.com/photo-1608155686393-8fdd966d784d?w=400" alt="太監">
+                    <img src="eunuch.jpg" alt="太監">
                 </div>
                 <div class="role-name">太監</div>
             </div>
 
             <div class="role-card" id="role_maid" onclick="selectRole('宮女')">
                 <div class="role-img-placeholder">
-                    <img src="https://images.unsplash.com/photo-1578489759854-d1db4b978e8b?w=400" alt="宮女">
+                    <img src="maid.jpg" alt="宮女">
                 </div>
                 <div class="role-name">宮女</div>
             </div>
 
             <div class="role-card" id="role_nanny" onclick="selectRole('嬤嬤')">
                 <div class="role-img-placeholder">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400" alt="嬤嬤">
+                    <img src="nanny.jpg" alt="嬤嬤">
                 </div>
                 <div class="role-name">嬤嬤</div>
             </div>
@@ -249,4 +249,19 @@ function showEnding() {
     let finalMsg = "";
     if(selectedRole === "太監") {
         if((counts['B']||0) + (counts['D']||0) >= 2) finalMsg = roleEnds["BD"];
-        else if((counts['A']||0
+        else if((counts['A']||0) >= 2) finalMsg = roleEnds["A"];
+        else finalMsg = roleEnds["C"];
+    } else if(selectedRole === "宮女") {
+        if((counts['A']||0) >= 2) finalMsg = roleEnds["A"];
+        else if((counts['C']||0) + (counts['D']||0) >= 2) finalMsg = roleEnds["CD"];
+        else finalMsg = roleEnds["B"];
+    } else {
+        if((counts['B']||0) + (counts['C']||0) >= 2) finalMsg = roleEnds["BC"];
+        else if((counts['A']||0) >= 2) finalMsg = roleEnds["A"];
+        else finalMsg = roleEnds["D"];
+    }
+    document.getElementById('finalReport').innerText = "軌跡：" + results.join(' ➔ ') + "\n\n" + finalMsg;
+}
+</script>
+</body>
+</html>
